@@ -18,16 +18,10 @@ function Signup() {
         setError("");
 
         try {
-            console.log("true 1");
-            console.log(data);
             const userData = await authService.createAccount(data);
-            console.log("true 2");
             if(userData){
-                console.log("true 3");
                 const user = await authService.getCurrentSession(userData);
-                console.log("true 4");
                 if(user) dispatch(authLogin(data)); // Make the User Login after signup
-                console.log("true 5");
                 navigate('/');
             }
         } 

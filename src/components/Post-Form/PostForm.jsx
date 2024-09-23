@@ -45,13 +45,10 @@ function PostForm({post}) {
       
       if(newPostImage){
 
-        console.log("0");
         data.featured_image = newPostImage.$id;
-        console.log("1");
         const newPost = await DBService.createPost({
           ...data, userId : userData.$id
         })
-        console.log("2");
 
         if(newPost){
           navigate(`/post/${newPost.$id}`)
@@ -84,8 +81,8 @@ function PostForm({post}) {
   }, [watch, slugTranformation, setValue])
 
   return (
-    <form onSubmit={handleSubmit(submitPost)} className="flex flex-wrap">
-      <div className="w-2/3 px-2">
+    <form onSubmit={handleSubmit(submitPost)} className="flex flex-wrap md:flex-nowrap">
+      <div className="w-full md:w-2/3 px-2">
         <Input
           label="Title :"
           placeholder="Title"
@@ -103,7 +100,8 @@ function PostForm({post}) {
         />
         <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />
       </div>
-      <div className="w-1/3 px-2">
+      
+      <div className="w-full md:w-1/3 px-2 mt-4 md:mt-0">
         <Input
           label="Featured Image :"
           type="file"
@@ -117,7 +115,7 @@ function PostForm({post}) {
             <img
               src={DBService.getFile(post.featured_image)}
               alt={post.title}
-              className="rounded-lg"
+              className="rounded-lg w-full"
             />
           </div>
         )}
